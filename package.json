@@ -1,0 +1,31 @@
+{
+  "name": "i18n",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "concurrently \"npm:build:esm:watch\" \"npm:build:cjs:watch\"",
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc && tsc-alias",
+    "build:esm:watch": "concurrently \"tsc -w\" \"tsc-alias -w\"",
+    "build:cjs": "tsc -p tsconfig.cjs.json && tsc-alias -p tsconfig.cjs.json",
+    "build:cjs:watch": "concurrently \"tsc -p tsconfig.cjs.json -w\" \"tsc-alias -p tsconfig.cjs.json -w\""
+  },
+  "exports": {
+    ".": {
+      "import": "./esm/index.js",
+      "require": "./cjs/index.js",
+      "default": "./esm/index.js"
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "tsc-alias": "^1.8.6",
+    "typescript": "^5.0.4"
+  }
+}
